@@ -1,0 +1,33 @@
+name: Random Past Commits
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '* * * * *'  # Run every minute
+
+jobs:
+  create-random-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+      - name: Create random commits
+        run: |
+          for i in {1..5}; do
+            random_days=$((RANDOM % 365))
+            commit_date=$(date -d "$random_days days ago" +"%Y-%m-%d %H:%M:%S")
+            echo "Random commit $i" >> random_file.txt
+            git add random_file.txt
+            GIT_AUTHOR_DATE="$commit_date" GIT_COMMITTER_DATE="$commit_date" git commit -m "Random commit $i"
+          done
+
+      - name: Push changes
+        run: git push origin main
