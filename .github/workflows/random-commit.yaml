@@ -16,8 +16,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
+          git config user.name "baolong0"
+          git config user.email "baolong23.6.2000@gmail.com"
 
       - name: Create random commits
         run: |
