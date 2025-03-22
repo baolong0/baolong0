@@ -3,7 +3,7 @@ name: Random Past Commits
 on:
   workflow_dispatch:
   schedule:
-    - cron: '* * * * *'  # Run every minute
+    - cron: '*/15 * * * *'  # Run every minute
 
 jobs:
   create-random-commits:
